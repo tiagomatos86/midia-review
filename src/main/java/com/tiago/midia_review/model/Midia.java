@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -27,7 +28,7 @@ public class Midia {
     @NotBlank(message = "O tipo é obrigatório")
     private String tipo;
 
-    @NotBlank(message = "O ano de lançamento é obrigatório")
+    @NotNull(message = "O ano de lançamento é obrigatório")
     private int anoLancamento;
     private String imageUrl;
 
