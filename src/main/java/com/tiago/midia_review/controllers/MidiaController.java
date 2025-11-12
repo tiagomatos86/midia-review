@@ -2,15 +2,22 @@ package com.tiago.midia_review.controllers;
 
 import java.util.List;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tiago.midia_review.model.Midia;
 import com.tiago.midia_review.repository.MidiaRepository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
+
 
 
 @RestController
@@ -31,4 +38,15 @@ public class MidiaController {
     public Midia salvarMidia(@RequestBody Midia midia) {
         return midiaRepository.save(midia);
     }
+
+    @GetMapping("/{id}")
+    public Midia econtrarMidiaPorId(@PathVariable Long id) {
+        Midia midia = midiaRepository.findById(id).orElse(null);
+        return midia;
+    }
+
+    // @PutMapping("/{id}")
+    // public ResponseEntity<Midia> atualizarMidia(@PathVariable Long id, @RequestBody Midia midiaAtualizada) {
+    //     Optional<Midia> midiaExistente = midiaRepository.f
+    // }
 }
