@@ -1,8 +1,8 @@
 package com.tiago.midia_review.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,8 +45,24 @@ public class MidiaController {
         return midia;
     }
 
-    // @PutMapping("/{id}")
-    // public ResponseEntity<Midia> atualizarMidia(@PathVariable Long id, @RequestBody Midia midiaAtualizada) {
-    //     Optional<Midia> midiaExistente = midiaRepository.f
-    // }
+    @PutMapping("/{id}")
+    public ResponseEntity<Midia> atualizarMidia(@PathVariable Long id, @RequestBody Midia midiaAtualizada) {
+        Optional<Midia> midiaExistente = midiaRepository.findById(id);
+
+        if(midiaExistente.isPresent()) {
+            Midia midia = midiaExistente.get();
+
+            midia.setTitulo(midiaAtualizada.getTitulo());
+            midia.setTipo(midiaAtualizada.getTipo());
+            midia.setAnoLancamento(midiaAtualizada.getAnoLancamento());
+            midia.setImageUrl(midiaAtualizada.getImageUrl());
+            midia.setResenha(midiaAtualizada.getResenha());
+            midia.setNota(midiaAtualizada.getNota());
+
+            Midia midiaSalva = midiaRepository.save(midia);
+            return ResponseEntity.ok(midiaSalva); //retorna 200 ok
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
