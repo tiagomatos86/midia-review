@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tiago.midia_review.model.Midia;
 import com.tiago.midia_review.repository.MidiaRepository;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,10 +41,21 @@ public class MidiaController {
         return midiaRepository.save(midia);
     }
 
+    // @GetMapping("/{id}")
+    // public Midia econtrarMidiaPorId(@PathVariable Long id) {
+    //     Midia midia = midiaRepository.findById(id).orElse(null);
+    //     return midia;
+    // }
+
     @GetMapping("/{id}")
-    public Midia econtrarMidiaPorId(@PathVariable Long id) {
-        Midia midia = midiaRepository.findById(id).orElse(null);
-        return midia;
+    public ResponseEntity<Midia> encontrarMidiaPorId(@PathVariable Long id) {
+         Optional<Midia> midiaExiste = midiaRepository.findById(id);
+
+        if(midiaExiste.isPresent()) {
+            return ResponseEntity.ok(midiaExiste.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/{id}")
@@ -63,6 +76,29 @@ public class MidiaController {
             return ResponseEntity.ok(midiaSalva); //retorna 200 ok
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Sem response entity, retorna sempre 200
+    // @DeleteMapping("/{id}")
+    // public void deletarMidia(@PathVariable Long id) {
+    //     Midia midiaBanco = midiaRepository.findById(id).orElse(null);
+    //     if(midiaBanco != null) {
+    //         midiaRepository.delete(midiaBanco);
+    //     }
+    // } 
+
+
+    //obedece a semântica REST e retorna 204 se o delete for bem sucedido e 404 se inexistente
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarMidia(@PathVariable Long id) {
+        Optional<Midia> midiaExistente = midiaRepository.findById(id);
+
+        if (midiaExistente.isPresent()) {
+            midiaRepository.delete(midiaExistente.get());
+            return ResponseEntity.noContent().build(); // 204 No Content
+        } else {
+            return ResponseEntity.notFound().build(); // 404 Not Found
         }
     }
 }
