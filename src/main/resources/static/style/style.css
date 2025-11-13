@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 20px;
+    background-color: #f9f9f9;
+}
+
+.midia {
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 15px;
+    margin: 10px auto;
+    border-radius: 5px;
+    max-width: 600px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.midia h2 {
+  margin: 0;
+  color: #444;
+}
+
+.midia p {
+  margin: 5px 0;
+}
+
+.midia img {
+  max-width: 150px;
+  display: block;
+  margin-top: 10px;
+}
