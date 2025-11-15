@@ -6,35 +6,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
 
+
+    <!-- Compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection" />
 
     <title>Minhas Mídias</title>
+
 </head>
 
 <body>
-
     <nav>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Logo</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">JavaScript</a></li>
-            </ul>
+            <form class="right" style="display: flex; align-items: center; gap: 12px; margin: 0;">
+                <span class="white-text" style="font-size: 14px;">Buscar por</span>
+
+                <div class="input-field dropdown-small" style="margin: 0; width: 140px;">
+                    <select id="select" name="select" class="white-text">
+                        <option value="titulo" selected>Título</option>
+                        <option value="tipo">Tipo</option>
+                        <option value="ano">Ano</option>
+                    </select>
+                </div>
+
+                <a id="btn-buscar" class="btn waves-effect waves-light">
+                    Buscar
+                </a>
+            </form>
         </div>
     </nav>
 
-
     <div id="lista-midias"></div>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selects = document.querySelectorAll('select');
+            M.FormSelect.init(selects);
+        });
+    </script>
 
     <script src="/js/script.js"></script>
 
-    !--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 
 </html>

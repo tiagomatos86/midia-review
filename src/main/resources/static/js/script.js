@@ -1,4 +1,4 @@
-// URL da sua API
+// URL da API
 const API_URL = "http://localhost:8080/midias";
 
 // Função para buscar e exibir as mídias
@@ -33,3 +33,5 @@ async function carregarMidias(params) {
 
 // Carregar mídias ao abrir a página
 carregarMidias();
+
+

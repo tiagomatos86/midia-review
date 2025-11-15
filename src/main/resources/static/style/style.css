@@ -28,3 +28,44 @@ body {
   display: block;
   margin-top: 10px;
 }
+
+/* teste gemini */
+
+/* Remove o estilo padrão do Materialize */
+nav .select-wrapper input.select-dropdown {
+    background: white !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: black !important;
+    height: 28px !important;
+    line-height: 28px !important;
+    padding-left: 8px !important;
+    margin: 0 !important;
+    font-size: 14px !important;
+}
+
+/* Seta */
+nav .select-wrapper .caret {
+    color: black !important;
+    right: 6px;
+    top: 12px;
+}
+
+/* Dropdown alinhado */
+nav .input-field {
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Remove linha sublinhada que o select cria */
+nav .input-field:before,
+nav .input-field:after {
+    display: none !important;
+}
+
+/* Dropdown menu (lista que abre) */
+.dropdown-content li > a,
+.dropdown-content li > span {
+    color: black !important;
+}
