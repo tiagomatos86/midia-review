@@ -1,9 +1,89 @@
-body {
+/* Reset e base */
+html, body {
+    margin: 0;
+    padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    margin: 20px;
     background-color: #f9f9f9;
+    overflow-x: hidden;
 }
 
+/* Navbar fixa no topo */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1e3a5f; /* azul escuro */
+    color: white;
+    padding: 12px 24px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    z-index: 1000;
+}
+
+/* Alinhamento interno da navbar */
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.navbar-right .logo {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Elementos de busca */
+.label-busca {
+    font-size: 14px;
+    color: white;
+}
+
+.select-tipo {
+    padding: 6px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+}
+
+.form-buscar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-buscar {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+}
+
+.button-pesquisar {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #1e3a5f;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-pesquisar:hover {
+    background-color: #e0e0e0;
+}
+
+/* Espaço abaixo da navbar para evitar sobreposição */
+main {
+    margin-top: 80px; /* altura da navbar + espaçamento */
+    padding: 24px;
+}
+
+/* Estilo das mídias */
 .midia {
     border: 1px solid #ccc;
     background: #fff;
@@ -11,61 +91,20 @@ body {
     margin: 10px auto;
     border-radius: 5px;
     max-width: 600px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .midia h2 {
-  margin: 0;
-  color: #444;
+    margin: 0;
+    color: #444;
 }
 
 .midia p {
-  margin: 5px 0;
+    margin: 5px 0;
 }
 
 .midia img {
-  max-width: 150px;
-  display: block;
-  margin-top: 10px;
-}
-
-/* teste gemini */
-
-/* Remove o estilo padrão do Materialize */
-nav .select-wrapper input.select-dropdown {
-    background: white !important;
-    border: none !important;
-    box-shadow: none !important;
-    color: black !important;
-    height: 28px !important;
-    line-height: 28px !important;
-    padding-left: 8px !important;
-    margin: 0 !important;
-    font-size: 14px !important;
-}
-
-/* Seta */
-nav .select-wrapper .caret {
-    color: black !important;
-    right: 6px;
-    top: 12px;
-}
-
-/* Dropdown alinhado */
-nav .input-field {
-    margin: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-}
-
-/* Remove linha sublinhada que o select cria */
-nav .input-field:before,
-nav .input-field:after {
-    display: none !important;
-}
-
-/* Dropdown menu (lista que abre) */
-.dropdown-content li > a,
-.dropdown-content li > span {
-    color: black !important;
+    max-width: 150px;
+    display: block;
+    margin-top: 10px;
 }

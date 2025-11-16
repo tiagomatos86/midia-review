@@ -6,54 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
 
-
-    <!-- Compiled and minified CSS -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
-
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection" />
-
     <title>Minhas Mídias</title>
 
 </head>
 
 <body>
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Logo</a>
-            <form class="right" style="display: flex; align-items: center; gap: 12px; margin: 0;">
-                <span class="white-text" style="font-size: 14px;">Buscar por</span>
-
-                <div class="input-field dropdown-small" style="margin: 0; width: 140px;">
-                    <select id="select" name="select" class="white-text">
-                        <option value="titulo" selected>Título</option>
-                        <option value="tipo">Tipo</option>
-                        <option value="ano">Ano</option>
-                    </select>
-                </div>
-
-                <a id="btn-buscar" class="btn waves-effect waves-light">
-                    Buscar
-                </a>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="label-busca">Buscar por</span>
+            <select name="select" id="select" class="select-tipo">
+                <option value="titulo" selected>Título</option>
+                <option value="tipo">Tipo</option>
+                <option value="ano">Ano</option>
+            </select>
+            <form id="form-buscar" class="form-buscar">
+                <input type="text" class="input-buscar" placeholder="Pesquisar">
+                <button type="submit" class="button-pesquisar">Pesquisar</button>
             </form>
+        </div>
+        <div class="navbar-right">
+            <a href="#" class="logo" id="logo">Midia Review</a>
         </div>
     </nav>
 
     <div id="lista-midias"></div>
-
-    <!--JavaScript at end of body for optimized loading-->
-    <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const selects = document.querySelectorAll('select');
-            M.FormSelect.init(selects);
-        });
-    </script>
 
     <script src="/js/script.js"></script>
 
