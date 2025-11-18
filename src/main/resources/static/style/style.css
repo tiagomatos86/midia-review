@@ -158,3 +158,48 @@ html, body {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
+.button-salvar {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #1e3a5f;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-salvar:hover {
+    background-color: #2a4a7a;
+}
+
+.voltar {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.voltar:hover {
+  text-decoration: underline;
+}
+
+/* Linha flexível para inputs curtos */
+.form-row {
+  display: flex;
+  justify-content: flex-start;
+  gap: 50px;
+}
+
+/* Ajusta largura dos grupos pequenos */
+.form-group.small {
+  flex: 1;
+  max-width: 200px; /* controla tamanho máximo */
+}
+
+.form-group.small input {
+  width: 100%;
+}

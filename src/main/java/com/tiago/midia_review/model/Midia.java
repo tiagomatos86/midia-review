@@ -2,6 +2,8 @@ package com.tiago.midia_review.model;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,6 +42,7 @@ public class Midia {
     @Max(value = 10, message = "A nota máxima é 10")
     private Double nota;
 
+    @CreationTimestamp
     private LocalDate dataRegistro;
 
     public Midia() {}

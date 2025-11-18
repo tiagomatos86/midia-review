@@ -93,4 +93,35 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "form-midia.html";
         });
     }
+
+    // Captura o formulário de cadastro de mídia
+    const formMidia = document.getElementById("form-midia");
+    if (formMidia) {
+        formMidia.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(formMidia);
+            const midia = Object.fromEntries(formData.entries());
+
+            // Normaliza tipos numéricos
+            midia.anoLancamento = Number(midia.anoLancamento);
+            midia.nota = Number(midia.nota);
+
+            try {
+                const resp = await fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(midia)
+                });
+
+                if (!resp.ok) throw new Error("Erro ao cadastrar mídia: " + resp.status);
+
+                alert("Mídia cadastrada com sucesso!");
+                window.location.href = "index.html"; // volta para a lista
+            } catch (err) {
+                console.error(err);
+                alert("Erro ao cadastrar mídia. Tente novamente.");
+            }
+        });
+    }
 });
