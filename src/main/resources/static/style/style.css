@@ -77,10 +77,8 @@ html, body {
     background-color: #e0e0e0;
 }
 
-/* Espaço abaixo da navbar para evitar sobreposição */
-main {
-    margin-top: 80px; /* altura da navbar + espaçamento */
-    padding: 24px;
+.lista-midias {
+    margin-top: 100px; /* altura da navbar */
 }
 
 /* Estilo das mídias */
@@ -107,4 +105,56 @@ main {
     max-width: 150px;
     display: block;
     margin-top: 10px;
+}
+
+.fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background-color: #1e3a5f; /* mesma cor da navbar */
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.fab:hover {
+    background-color: #2a4a7a; /* tom mais claro no hover */
+}
+
+.form-cadastro {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

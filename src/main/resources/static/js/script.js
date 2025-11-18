@@ -1,33 +1,43 @@
 // URL da API
 const API_URL = "http://localhost:8080/midias";
 
+// Renderização da lista
+function renderLista(midias) {
+    const lista = document.getElementById("lista-midias");
+    lista.innerHTML = "";
+
+    if (!midias || midias.length === 0) {
+        lista.innerHTML = "<p>Nenhuma mídia encontrada.</p>";
+        return;
+    }
+
+    midias.forEach(midia => {
+        const div = document.createElement("div");
+        div.className = "midia";
+        div.innerHTML = `
+            <h2>${midia.titulo} (${midia.anoLancamento})</h2>
+            <p><strong>Tipo:</strong> ${midia.tipo}</p>
+            <p><strong>Nota:</strong> ${midia.nota}</p>
+            <p><strong>Resenha:</strong> ${midia.resenha || "Sem resenha"}</p>
+            ${midia.imageUrl ? `<img src="${midia.imageUrl}" alt="${midia.titulo}">` : ""}
+        `;
+        lista.appendChild(div);
+    });
+}
+
 // Função para buscar e exibir todas as mídias
 async function carregarMidias() {
+    const lista = document.getElementById("lista-midias");
+    lista.innerHTML = "<p>Carregando mídias...</p>";
+
     try {
         const response = await fetch(API_URL);
-        if (!response.ok) {
-            throw new Error("Erro ao buscar mídias: " + response.status);
-        }
+        if (!response.ok) throw new Error("Erro ao buscar mídias: " + response.status);
         const midias = await response.json();
-
-        const lista = document.getElementById("lista-midias");
-        lista.innerHTML = "";
-
-        midias.forEach(midia => {
-            const div = document.createElement("div");
-            div.className = "midia";
-            div.innerHTML = `
-                <h2>${midia.titulo} (${midia.anoLancamento})</h2>
-                <p><strong>Tipo:</strong> ${midia.tipo}</p>
-                <p><strong>Nota:</strong> ${midia.nota}</p>
-                <p><strong>Resenha:</strong> ${midia.resenha || "Sem resenha"}</p>
-                ${midia.imageUrl ? `<img src="${midia.imageUrl}" alt="${midia.titulo}">` : ""}
-            `;
-            lista.appendChild(div);
-        });
+        renderLista(midias);
     } catch (error) {
         console.error(error);
-        document.getElementById("lista-midias").innerHTML = "<p>Erro ao carregar mídias.</p>";
+        lista.innerHTML = "<p>Erro ao carregar mídias.</p>";
     }
 }
 
@@ -37,61 +47,50 @@ async function buscarMidias() {
     const termo = document.querySelector(".input-buscar").value.trim();
 
     if (!termo) {
-        carregarMidias(); // se o campo estiver vazio, carrega tudo
+        carregarMidias();
         return;
     }
+
+    const lista = document.getElementById("lista-midias");
+    lista.innerHTML = "<p>Carregando resultados...</p>";
 
     const url = `${API_URL}/search?${tipo}=${encodeURIComponent(termo)}`;
 
     try {
         const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error("Erro ao buscar mídias: " + response.status);
-        }
+        if (!response.ok) throw new Error("Erro ao buscar mídias: " + response.status);
         const midias = await response.json();
-
-        const lista = document.getElementById("lista-midias");
-        lista.innerHTML = "";
-
-        if (midias.length === 0) {
-            lista.innerHTML = "<p>Nenhuma mídia encontrada.</p>";
-            return;
-        }
-
-        midias.forEach(midia => {
-            const div = document.createElement("div");
-            div.className = "midia";
-            div.innerHTML = `
-                <h2>${midia.titulo} (${midia.anoLancamento})</h2>
-                <p><strong>Tipo:</strong> ${midia.tipo}</p>
-                <p><strong>Nota:</strong> ${midia.nota}</p>
-                <p><strong>Resenha:</strong> ${midia.resenha || "Sem resenha"}</p>
-                ${midia.imageUrl ? `<img src="${midia.imageUrl}" alt="${midia.titulo}">` : ""}
-            `;
-            lista.appendChild(div);
-        });
+        renderLista(midias);
     } catch (error) {
         console.error(error);
-        document.getElementById("lista-midias").innerHTML = "<p>Erro ao buscar mídias.</p>";
+        lista.innerHTML = "<p>Erro ao buscar mídias.</p>";
     }
 }
 
 // Inicialização ao carregar a página
 document.addEventListener("DOMContentLoaded", () => {
-    // Carrega todas as mídias por padrão
     carregarMidias();
 
-    // Evento de busca ao enviar o formulário
     const form = document.getElementById("form-buscar");
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        buscarMidias();
-    });
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            buscarMidias();
+        });
+    }
 
-    // Evento de clique no logo para recarregar tudo
     const logo = document.getElementById("logo");
-    logo.addEventListener("click", (e) => {
-        e.preventDefault();
-        carregarMidias();
-    });
+    if (logo) {
+        logo.addEventListener("click", (e) => {
+            e.preventDefault();
+            carregarMidias();
+        });
+    }
+
+    const btnAdd = document.getElementById("btn-add-midia");
+    if (btnAdd) {
+        btnAdd.addEventListener("click", () => {
+            window.location.href = "form-midia.html";
+        });
+    }
 });
