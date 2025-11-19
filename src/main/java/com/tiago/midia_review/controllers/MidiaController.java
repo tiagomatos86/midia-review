@@ -19,17 +19,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
-
-
 @RestController
 @RequestMapping("/midias")
-public class MidiaController { 
-    
+public class MidiaController {
+
     @Autowired
     private MidiaRepository midiaRepository;
 
-    //GET /midias -> lista todas as mídias
+    // GET /midias -> lista todas as mídias
     @GetMapping
     public List<Midia> listarTodas() {
         return midiaRepository.findAll();
@@ -43,26 +40,41 @@ public class MidiaController {
 
     // @GetMapping("/{id}")
     // public Midia econtrarMidiaPorId(@PathVariable Long id) {
-    //     Midia midia = midiaRepository.findById(id).orElse(null);
-    //     return midia;
+    // Midia midia = midiaRepository.findById(id).orElse(null);
+    // return midia;
     // }
 
     @GetMapping("/{id}")
     public ResponseEntity<Midia> encontrarMidiaPorId(@PathVariable Long id) {
-         Optional<Midia> midiaExiste = midiaRepository.findById(id);
+        Optional<Midia> midiaExiste = midiaRepository.findById(id);
 
-        if(midiaExiste.isPresent()) {
+        if (midiaExiste.isPresent()) {
             return ResponseEntity.ok(midiaExiste.get());
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
+    @GetMapping("/titulo")
+    public List<Midia> listarPorTitulo(@RequestParam String titulo) {
+        return midiaRepository.findByTituloContainingIgnoreCase(titulo);
+    }
+
+    @GetMapping("/tipo")
+    public List<Midia> listarPorTipo(@RequestParam String tipo) {
+        return midiaRepository.findByTipoIgnoreCase(tipo);
+    }
+
+    @GetMapping("/ano")
+    public List<Midia> listarPorAno(@RequestParam Integer anoLancamento) {
+        return midiaRepository.findByAnoLancamento(anoLancamento);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Midia> atualizarMidia(@PathVariable Long id, @RequestBody Midia midiaAtualizada) {
         Optional<Midia> midiaExistente = midiaRepository.findById(id);
 
-        if(midiaExistente.isPresent()) {
+        if (midiaExistente.isPresent()) {
             Midia midia = midiaExistente.get();
 
             midia.setTitulo(midiaAtualizada.getTitulo());
@@ -73,7 +85,7 @@ public class MidiaController {
             midia.setNota(midiaAtualizada.getNota());
 
             Midia midiaSalva = midiaRepository.save(midia);
-            return ResponseEntity.ok(midiaSalva); //retorna 200 ok
+            return ResponseEntity.ok(midiaSalva); // retorna 200 ok
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -82,14 +94,14 @@ public class MidiaController {
     // Sem response entity, retorna sempre 200
     // @DeleteMapping("/{id}")
     // public void deletarMidia(@PathVariable Long id) {
-    //     Midia midiaBanco = midiaRepository.findById(id).orElse(null);
-    //     if(midiaBanco != null) {
-    //         midiaRepository.delete(midiaBanco);
-    //     }
-    // } 
+    // Midia midiaBanco = midiaRepository.findById(id).orElse(null);
+    // if(midiaBanco != null) {
+    // midiaRepository.delete(midiaBanco);
+    // }
+    // }
 
-
-    //obedece a semântica REST e retorna 204 se o delete for bem sucedido e 404 se inexistente
+    // obedece a semântica REST e retorna 204 se o delete for bem sucedido e 404 se
+    // inexistente
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarMidia(@PathVariable Long id) {
         Optional<Midia> midiaExistente = midiaRepository.findById(id);
