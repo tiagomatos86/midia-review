@@ -54,7 +54,15 @@ async function buscarMidias() {
     const lista = document.getElementById("lista-midias");
     lista.innerHTML = "<p>Carregando resultados...</p>";
 
-    const url = `${API_URL}/search?${tipo}=${encodeURIComponent(termo)}`;
+    // Monta a URL de acordo com o tipo selecionado
+    let url;
+    if (tipo === "titulo") {
+        url = `${API_URL}/titulo?titulo=${encodeURIComponent(termo)}`;
+    } else if (tipo === "tipo") {
+        url = `${API_URL}/tipo?tipo=${encodeURIComponent(termo)}`;
+    } else if (tipo === "ano") {
+        url = `${API_URL}/ano?anoLancamento=${encodeURIComponent(termo)}`;
+    }
 
     try {
         const response = await fetch(url);
